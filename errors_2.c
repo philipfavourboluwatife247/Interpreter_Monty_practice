@@ -1,9 +1,8 @@
 /*
+ * Auth: Philip Favour B.
+ * Col: Henry Ikegwuonu
  * File: errors_2.c
- * Auth: Bennett Dixon
- *       Brennan D Baraban
  */
-
 #include "monty.h"
 
 int short_stack_error(unsigned int line_number, char *op);

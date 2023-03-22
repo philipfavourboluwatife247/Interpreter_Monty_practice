@@ -1,211 +1,106 @@
-# :snake: Monty Interpreter
+## :snake: Monty Interpreter Team Project
 
-Welcome to the Monty Bytecode Interpreter. This interpreter was built in the C language and is compliant with `ISO90`, `ISO99`, & `ISO11`. It reads Monty bytecode files of any extension (preferably `.m` although it doesn't matter), and interprets the opcodes contained.
+## PROJECT DESCRIPTION
 
-Our interpreter can be run as either a stack (LIFO) or queue (FIFO). Mode can be switched mid-script. The interpreter can handle a variety of Monty opcodes, including printing, mathematical operations, and more - all handled opcodes are listed below.
+A language interpreter made in the C programming language to manage stacks and queues (LIFO and FIFO). The aim is to interpret Monty bytecodes files. Monty is a language that aims to close the gap between scripting and programming languages.
 
-## :running: Getting Started
+## Requirements
+* Allowed editors: vi, vim, emacs
+* All your files will be compiled on Ubuntu 20.04 LTS using gcc, using the options -Wall -Werror -Wextra -pedantic -std=c89
+* All your files should end with a new line
+* A README.md file, at the root of the folder of the project is mandatory
+* Your code should use the Betty style. It will be checked using betty-style.pl and betty-doc.pl
+* You allowed to use a maximum of one global variable
+* No more than 5 functions per file
+* You are allowed to use the C standard library
+* The prototypes of all your functions should be included in your header file called monty.h
+* Don’t forget to push your header file
+* All your header files should be include guarded
+* You are expected to do the tasks in the order shown in the project
 
-* [Ubuntu 14.04 LTS](http://releases.ubuntu.com/14.04/) - Operating system reqd.
-
-* [GCC 4.8.4](https://gcc.gnu.org/gcc-4.8/) - Compiler used
-
-
-## :warning: Prerequisites
-
-* Must have `git` installed.
-
-* Must have repository cloned.
-
+## Compilation
+* Your code will be compiled this way:
 ```
-$ sudo apt-get install git
+$ gcc -Wall -Werror -Wextra -pedantic -std=c89 *.c -o monty
 ```
+## ALLOWABLE OPCODES AND WHAT THEY DO
+| **OPCODES**	| **WHAT THEY DO**
+| --- |   | --- |	
+| push		| add element to the 'top' of stack and 'end' of queue
+| pop		| remove element from 'top' of stack and 'end' of queue
+| pall		| print every member of the structure
+| pint		| prints the member value at the top of stack
+| swap		| swaps the order of the 1st and 2nd elements in stack
+| add		| add top two member values
+| sub		| subtract the top element from the 2nd top element
+| div		| divide the 2nd element by the top element
+| mul		| multiply the top two elements of the stack
+| mod		| the remainder when the 2nd element is divided by the top element
+| comment	| there is the ability to parse comments found in bytecode ->'#
+| pchar		| print character at the top of the stack
+| pstr		| print the character at the top of the stack
+| rotl		| moves element at the top to the bottom of the stack
+| rotr		| the bottom of the stack becomes the top
+| queue, stack	| toggles the doubly link list implementation style
+| nop		| opcode should do nothing
 
+## Examples: $ `cat opcodetestfile.m`
 
-## :arrow_down: Installing and Using
+`push 1`
 
-Clone the repository into a new directory:
+`push 2`
 
-```
-$ git clone https://github.com/BennettDixon/monty.git
-```
-Compile with the following:
+`push 3`
 
-```
-gcc -Wall -Werror -Wextra -pedantic *.c -o monty
-```
+`pall`
 
-Run the interpreter on a file:
+`$ ./montyfile opcodetestfile.m`
 
-```
-./monty file.m
-```
+`3`
 
+`2`
 
-## :wrench: Monty Opcodes
+`1`
 
-* **push**
-  * Usage: `push <int>`
-  * Pushes an element to the stack.
-  * The parameter `<int>` must be an integer.
+`$`
 
-* **pall**
-  * Prints all values in the stack/queue, starting from the top.
+---
 
-* **pint**
-  * Prints the top value of the stack/queue.
+`$ cat opcodetestfile.m`
 
-* **pop**
-  * Removes the top element of the stack/queue.
+`push 1`
 
-* **swap**
-  * Swaps the top two elements of the stack/queue.
+`push 2`
 
-* **nop**
-  * Does not do anything.
+`push 3`
 
-* **add**
-  * Adds the top two elements of the stack/queue.
-  * The result is stored in the second element from the top and the top element is popped.
+`pall`
 
-* **sub**
-  * Subtracts the top element of the stack/queue from the second element from the top.
-  * The result is stored in the second element from the top and the top element is removed.
+`rotl`
 
-* **mul**
-  * Multiplies the top two elements of the stack/queue.
-  * The result is stored in the second element from the top and the top element is removed.
+`pall`
 
-* **div**
-  * Divides the second element from the top of the stack/queue by the top element.
-  * The result is stored in the second element from the top and the top element is removed.
+`$ ./montyfile opcodetestfile.m`
 
-* **mod**
-  * Computes the modulus of the second element from the top of the stack/queue divided by the top element.
-  * The result is stored in the second element from the top and the top element is removed.
+`3`
 
-* **pchar**
-  * Prints the character value of the top element of the stack/queue.
-  * The integer at the top is treated as an ASCII value.
+`2`
 
-* **pstr**
-  * Prints the string contained in the stack/queue.
-  * Prints characters element by element until the stack/queue is empty, a value is `0`, or an error occurs.
+`1`
 
-* **rotl**
-  * Rotates the top element of the stack/queue to the bottom.
+`2`
 
-* **rotr**
-  * Rotates the bottom element of the stack/queue to the top.
+`1`
 
-* **stack**
-  * Switches a queue to stack mode.
+`3`
 
-* **queue**
-  * Switches a stack to queue mode.
+## Exit Status
+Exits with status `EXIT_FAILURE`
 
-:arrow_forward: Opcodes preceeded by a `#` are treated as comments and the corresponding line is ignored.
+## Styling
+All files have been written in the `Betty Style`
 
-:arrow_forward: Lines can be empty and can contain any number of spaces before or after an opcode and its argument (only the first opcode and/or argument is taken into account).
-
-
-## :clipboard: Examples
-
-Note, Monty Interpreter runs in the default mode of STACK mode. Meaning it uses a stack. To switch to queue mode, see examples below.
-
-Push values onto the stack and print them all, or the top of the stack/front of queue.
-
-```
-$ cat push_pall_pint.m
-push 1
-push 2
-push 3
-pall
-pint
-$ ./monty push_pall_pint.m
-3
-2
-1
-3
-```
-
-Using mathmatical operations to add, multiply, divide, etc. Takes the second from the top and performs the operation on the top: `second_from_top / top`, `second_from_top - top`, `etc`. Then assigns that to the `second_from_top` and pops the top element off the stack.
-
-```
-$ cat math.m
-push 3
-push 2
-push 1
-pall
-mul
-pall
-$ ./monty math.m
-1
-2
-3
-1
-6
-```
-
-Entering queue mode to perform all operations in FIFO (queue) mode instead of default LIFO (stack) mode. Note: does not change current stack, sets front of queue to top of stack.
-
-```
-$ cat queue.m
-queue
-push 1
-push 2
-push 3
-pall
-stack
-push 4
-push 5
-push 6
-pall
-$ ./monty queue.m
-1
-2
-3
-6
-5
-4
-1
-2
-3
-```
-
-## :books: Coding Style Tests
-
-Strictly followed `Betty` style guide. To install
-
-```
-$ git clone https://github.com/holbertonschool/Betty.git
-
-$ cd Betty; ./install.sh
-```
-
-
-## :pencil: Version
-
-* 0.1.0
-
-
-## :blue_book: Authors
-
-* **Brennan D Baraban** - [@bdbaraban](https://github.com/bdbaraban)
-
-* **Bennett Dixon** - [@BennettDixon](https://github.com/BennettDixon)
-
-
-## :mag: License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-
-## :mega: Acknowledgments
-
-* Holberton School (providing guidance)
-* Stack Overflow (help on various memory errors (not leaks))
-
-<p align="center">
-  <img src="http://www.holbertonschool.com/holberton-logo.png">
-</p>
+## Authors
+| --- |		| --- |
+| Philip Favour B. | [Github](https://github.com/philipfavourboluwatife247) [Email](uniquedivinefavour2002@gmail.com)
+| Henry Ikegwuonu  | [Github](https://github.com/Hoffdl) [Email](ikegwuonuhenry25@gmail.com)

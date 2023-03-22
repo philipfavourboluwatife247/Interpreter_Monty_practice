@@ -1,8 +1,8 @@
 /*
- * File: set_op_tok_error.c
- * Auth: Bennett Dixon
+ * Auth: Philip Favour B.
+ * Col: Henry Ikegwuonu
+ * File: set_op_toks_error.c
  */
-
 #include "monty.h"
 
 /**

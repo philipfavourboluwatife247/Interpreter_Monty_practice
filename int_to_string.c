@@ -1,8 +1,8 @@
 /*
+ * Auth: Philip Favour B.
+ * Col: Henry Ikegwuonu
  * File: int_to_string.c
- * Auth: Bennett Dixon
  */
-
 #include <stdlib.h>
 
 char *get_int(int num);

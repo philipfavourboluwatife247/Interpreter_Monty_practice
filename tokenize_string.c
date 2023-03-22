@@ -1,8 +1,8 @@
 /*
+ * Auth: Philip Favour B.
+ * Col: Henry Ikegwuonu
  * File: tokenize_string.c
- * Auth: Bennett Dixon
  */
-
 #include <stdlib.h>
 
 char **strtow(char *str, char *delims);
